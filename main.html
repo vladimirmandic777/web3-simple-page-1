@@ -1,1 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.3.0/dist/web3.min.js"></script>
+    <script>
+      // Check if web3 is available
+      if (typeof web3 !== "undefined") {
+        // Use the provider injected by MetaMask
+        web3 = new Web3(web3.currentProvider);
+      } else {
+        // Set a fallback provider if the user doesn't have MetaMask
+        web3 = new Web3(
+          new Web3.providers.HttpProvider("https://goerli.net/")
+        );
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="displayBlockHeight()">Check Block Height</button>
+    <div id="block-height"></div>
+    <script>
+      function displayBlockHeight() {
+        web3.eth.getBlockNumber().then(blockNumber => {
+          document.getElementById("block-height").innerHTML = "Current Block Height: " + blockNumber;
+        });
+      }
+    </script>
+  </body>
+</html>
 
